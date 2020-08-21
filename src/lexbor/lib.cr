@@ -101,7 +101,7 @@ module Lexbor
 
     fun html_tokenizer_create = lxb_html_tokenizer_create : HtmlTokenizerT
     fun html_tokenizer_init = lxb_html_tokenizer_init(tkz : HtmlTokenizerT) : StatusT
-    fun html_tokenizer_opt_set = lxb_html_tokenizer_opt_set_noi(tkz : HtmlTokenizerT, opt : HtmlTokenizerOptT)
+    # fun html_tokenizer_opt_set = lxb_html_tokenizer_opt_set_noi(tkz : HtmlTokenizerT, opt : HtmlTokenizerOptT)
     fun html_tokenizer_callback_token_done_set = lxb_html_tokenizer_callback_token_done_set_noi(tkx : HtmlTokenizerT, cb : HtmlTokenizerTokenF, ctx : Void*)
     fun html_tokenizer_begin = lxb_html_tokenizer_begin(tkz : HtmlTokenizerT) : StatusT
     fun html_tokenizer_chunk = lxb_html_tokenizer_chunk(tkz : HtmlTokenizerT, data : UInt8*, size : LibC::SizeT) : StatusT

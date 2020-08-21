@@ -64,29 +64,31 @@ struct Lexbor::Tokenizer::Token
   end
 
   def processed_tag_text : String # tag_text with replaced entities
-    str = uninitialized Lexbor::Lib::Str
-    str.data = nil
-    str.length = 0
+    # str = uninitialized Lexbor::Lib::Str
+    # str.data = nil
+    # str.length = 0
 
-    pc = uninitialized Lexbor::Lib::HtmlParserChar
-    pointerof(pc).clear # nullify all fields of pc
+    # pc = uninitialized Lexbor::Lib::HtmlParserChar
+    # pointerof(pc).clear # nullify all fields of pc
 
-    pc.state = ->Lexbor::Lib.html_parser_char_ref_data
-    pc.mraw = Lexbor::Lib.html_tokenizer_mraw(tkz)
-    pc.replace_null = true
+    # pc.state = ->Lexbor::Lib.html_parser_char_ref_data
+    # pc.mraw = Lexbor::Lib.html_tokenizer_mraw(tkz)
+    # pc.replace_null = true
 
-    res = Lexbor::Lib.html_parser_char_process(pointerof(pc).as(Lexbor::Lib::HtmlParserCharT),
-      pointerof(str).as(Lexbor::Lib::StrT), @raw_token.in_begin,
-      @raw_token.begin_, @raw_token.end_)
+    # res = Lexbor::Lib.html_parser_char_process(pointerof(pc).as(Lexbor::Lib::HtmlParserCharT),
+    #   pointerof(str).as(Lexbor::Lib::StrT), @raw_token.in_begin,
+    #   @raw_token.begin_, @raw_token.end_)
 
-    unless res == Lexbor::Lib::StatusT::LXB_STATUS_OK
-      raise Lexbor::LibError.new("Failed to make data from token: #{res}")
-    end
+    # unless res == Lexbor::Lib::StatusT::LXB_STATUS_OK
+    #   raise Lexbor::LibError.new("Failed to make data from token: #{res}")
+    # end
 
-    res = String.new(str.data, str.length)
+    # res = String.new(str.data, str.length)
 
-    Lexbor::Lib.str_destroy(pointerof(str).as(Lexbor::Lib::StrT), pc.mraw, false)
-    res
+    # Lexbor::Lib.str_destroy(pointerof(str).as(Lexbor::Lib::StrT), pc.mraw, false)
+    # res
+
+    tag_text
   end
 
   # ========== token attributes ============
@@ -135,33 +137,35 @@ struct Lexbor::Tokenizer::Token
   end
 
   private def process_attribute_texts(attr)
-    name = uninitialized Lexbor::Lib::Str
-    name.data = nil
-    name.length = 0
+    # name = uninitialized Lexbor::Lib::Str
+    # name.data = nil
+    # name.length = 0
 
-    value = uninitialized Lexbor::Lib::Str
-    value.data = nil
-    value.length = 0
+    # value = uninitialized Lexbor::Lib::Str
+    # value.data = nil
+    # value.length = 0
 
-    pc = uninitialized Lexbor::Lib::HtmlParserChar
-    pointerof(pc).clear # nullify all fields of pc
+    # pc = uninitialized Lexbor::Lib::HtmlParserChar
+    # pointerof(pc).clear # nullify all fields of pc
 
-    mraw = Lexbor::Lib.html_tokenizer_mraw(tkz)
+    # mraw = Lexbor::Lib.html_tokenizer_mraw(tkz)
 
-    res = Lexbor::Lib.html_token_attr_parse(attr, pointerof(pc).as(Lexbor::Lib::HtmlParserCharT),
-      pointerof(name).as(Lexbor::Lib::StrT), pointerof(value).as(Lexbor::Lib::StrT), mraw)
+    # res = Lexbor::Lib.html_token_attr_parse(attr, pointerof(pc).as(Lexbor::Lib::HtmlParserCharT),
+    #   pointerof(name).as(Lexbor::Lib::StrT), pointerof(value).as(Lexbor::Lib::StrT), mraw)
 
-    unless res == Lexbor::Lib::StatusT::LXB_STATUS_OK
-      raise Lexbor::LibError.new("Failed to parse token attributes: #{res}")
-    end
+    # unless res == Lexbor::Lib::StatusT::LXB_STATUS_OK
+    #   raise Lexbor::LibError.new("Failed to parse token attributes: #{res}")
+    # end
 
-    name_s = name.data.null? ? "" : String.new(name.data, name.length)
-    value_s = value.data.null? ? "" : String.new(value.data, value.length)
+    # name_s = name.data.null? ? "" : String.new(name.data, name.length)
+    # value_s = value.data.null? ? "" : String.new(value.data, value.length)
 
-    Lexbor::Lib.str_destroy(pointerof(name).as(Lexbor::Lib::StrT), mraw, false)
-    Lexbor::Lib.str_destroy(pointerof(value).as(Lexbor::Lib::StrT), mraw, false)
+    # Lexbor::Lib.str_destroy(pointerof(name).as(Lexbor::Lib::StrT), mraw, false)
+    # Lexbor::Lib.str_destroy(pointerof(value).as(Lexbor::Lib::StrT), mraw, false)
 
-    {name_s, value_s}
+    # {name_s, value_s}
+
+    {"", ""}
   end
 
   def each_processed_attribute
