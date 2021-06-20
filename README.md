@@ -13,5 +13,5 @@ dependencies:
     github: kostya/lexbor
 ```
 
-And run `shards install` (Installation require cc and make, make sure it installed)
+And run `shards install` (Installation require cc and make)
 
