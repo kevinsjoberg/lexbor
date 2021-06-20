@@ -10,7 +10,7 @@ package: ./lexbor-c/build/liblexbor_static.a
 ./lexbor-c/build/liblexbor_static.a: ./lexbor-c
 	mkdir -p lexbor-c/build
 	cp lxbMakefile lexbor-c/build/Makefile
-	cd ./lexbor-c/build && make lexbor_static -j 4
+	cd ./lexbor-c/build && make lexbor_static -j 4 CMAKE_SOURCE_DIR=../ CMAKE_BINARY_DIR=./
 
 .PHONY: clean
 clean:
